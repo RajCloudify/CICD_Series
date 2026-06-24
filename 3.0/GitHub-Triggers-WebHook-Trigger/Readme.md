@@ -20,8 +20,7 @@ Last Build History
 When a file is updated in the remote repository, the pipeline is automatically initiated by recognizing the new commit ID.
 
 
-
-
+**SIMILARY THERE IS POLL SCM -> Poll SCM is a Jenkins trigger that runs at scheduled time intervals using a cron expression. Jenkins periodically checks the source code repository, and if any changes are detected, it automatically triggers the pipeline execution.**
 
 
 
