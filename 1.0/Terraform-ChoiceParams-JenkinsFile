@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    parameters {
+    choice(
+        name: 'ACTION',
+        choices: ['apply', 'destroy'],
+        description: 'Choose Terraform action'
+    )
+}
+
+    stages {
+
+        stage('Stage-1 Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/RajCloudify/TerraformTrail.git'
+            }
+        }
+
+        stage('Stage-2 Terraform Init') {
+            steps {
+                dir('D2.2_Terraform-all-config-files') {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Stage-3 Terraform Plan') {
+            steps {
+                dir('D2.2_Terraform-all-config-files') {
+                    sh 'terraform plan'
+                }
+            }
+        }
+
+       stage('Stage-4 Apply/Destroy') {
+    steps {
+        dir('D2.2_Terraform-all-config-files') {
+            sh "terraform ${params.ACTION} -auto-approve"
+        }
+    }
+}
+        }
+    }
